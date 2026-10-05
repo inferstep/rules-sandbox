@@ -1,0 +1,23 @@
+name: ci
+on:
+  pull_request:
+  merge_group:
+  push:
+    branches: [main, dev]
+permissions:
+  contents: read
+jobs:
+  check-a:
+    runs-on: ubuntu-latest
+    steps:
+      - name: fail when the branch name starts with fail/
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          case "$HEAD_REF" in fail/*) echo "this branch is meant to fail"; exit 1;; esac
+          echo ok
+  check-b:
+    runs-on: ubuntu-latest
+    steps:
+      - name: a check that takes a while
+        run: sleep 40

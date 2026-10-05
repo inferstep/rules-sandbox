@@ -1,0 +1,11 @@
+name: pr-only
+on:
+  pull_request:
+  merge_group:
+permissions: {}
+jobs:
+  pr-only:
+    runs-on: ubuntu-latest
+    steps:
+      - name: a check that only pull requests and the merge queue produce
+        run: echo ok
